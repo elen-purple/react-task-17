@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { useEffect, useState } from "react";
 import { Section } from "./components/Section/Section";
 import { Form } from "./components/Form/Form";
 import { ContactsList } from "./components/ContactsList/ContactsList";
@@ -7,97 +7,102 @@ import { nanoid } from "nanoid";
 import { GlobalStyle } from "./components/GlobalStyle/GlobalStyle";
 import { Title } from "./components/ContactsList/ContactsListStyled";
 
-class App extends Component {
-  state = {
-    contacts: [],
-    filter: "",
-    name: "",
-    number: "",
-  };
+const App = () => {
+  const [contacts, setContacts] = useState(
+    getItem("contacts") ? getItem("contacts") : []
+  );
+  const [filter, setFilter] = useState("");
+  const [name, setName] = useState("");
+  const [number, setNumber] = useState("");
 
-  setItem = (key, value) => {
+  function setItem(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
-  };
+  }
 
-  getItem = (key) => {
+  function getItem(key) {
     return JSON.parse(localStorage.getItem(key));
-  };
+  }
 
-  componentDidMount = () => {
-    console.log(!Object.keys(localStorage).includes("contacts"));
+  useEffect(() => {
     if (!Object.keys(localStorage).includes("contacts")) {
-      this.setItem("contacts", []);
+      setItem("contacts", []);
     }
-    this.setState({ contacts: this.getItem("contacts") });
+    setContacts(getItem("contacts"));
+  }, []);
+
+  useEffect(() => {
+    setItem("contacts", contacts);
+  }, [contacts]);
+
+  const changeName = (e) => {
+    const { value } = e.target;
+    setName(value);
   };
 
-  componentDidUpdate = () => {
-    console.log("1");
-    if (
-      JSON.stringify(this.state.contacts) !==
-      JSON.stringify(this.getItem("contacts"))
-    ) {
-      console.log("2");
-      this.setItem("contacts", this.state.contacts);
-    }
+  const changeNumber = (e) => {
+    const { value } = e.target;
+    setNumber(value);
   };
 
-  changeValue = (e) => {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
+  const changeFilter = (e) => {
+    const { value } = e.target;
+    setFilter(value);
   };
 
-  addContact = (e) => {
+  const addContact = (e) => {
     e.preventDefault();
-    const array = [...this.state.contacts];
-    if (array.find((item) => item.name === this.state.name)) {
-      alert(`${this.state.name} is alredy in contacts`);
+    const array = [...contacts];
+    if (array.find((item) => item.name === name)) {
+      alert(`${name} is alredy in contacts`);
+      return;
     }
     array.push({
       id: nanoid(4),
-      name: this.state.name,
-      number: this.state.number,
+      name: name,
+      number: number,
     });
-    this.setState({ contacts: array, name: "", number: "" });
+    setContacts(array);
+    setName("");
+    setNumber("");
   };
 
-  deleteContact = (e) => {
+  const deleteContact = (e) => {
     if (e.target.dataset.action === "delete") {
-      const array = [...this.state.contacts];
+      const array = [...contacts];
       array.splice(
         array.indexOf(
           array.find((item) => item.id === e.target.parentElement.id)
         ),
         1
       );
-      this.setState({ contacts: array });
+
+      setContacts(array);
     }
   };
 
-  render() {
-    return (
-      <>
-        <GlobalStyle />
-        <Section title="Phonebook">
-          <Form
-            changeValue={this.changeValue}
-            addContact={this.addContact}
-            name={this.state.name}
-            number={this.state.number}
-          />
-        </Section>
-        <Section title="Contacts">
-          <Title>Contacts</Title>
-          <Filter filter={this.state.filter} changeValue={this.changeValue} />
-          <ContactsList
-            deleteContact={this.deleteContact}
-            filter={this.state.filter}
-            contacts={this.state.contacts}
-          />
-        </Section>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <GlobalStyle />
+      <Section title="Phonebook">
+        <Form
+          changeName={changeName}
+          changeNumber={changeNumber}
+          addContact={addContact}
+          name={name}
+          number={number}
+        />
+      </Section>
+      <Section title="Contacts">
+        <Title>Contacts</Title>
+        <Filter filter={filter} changeValue={changeFilter} />
+        <ContactsList
+          deleteContact={deleteContact}
+          filter={filter}
+          contacts={contacts}
+        />
+      </Section>
+    </>
+  );
+};
 
 export default App;

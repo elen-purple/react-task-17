@@ -1,12 +1,9 @@
-import { Component } from "react";
-import { Container, Sect, Title } from "./SectionStyled";
+import { Container, Sect } from "./SectionStyled";
 
-export class Section extends Component {
-  render() {
-    return (
-      <Sect>
-        <Container>{this.props.children}</Container>
-      </Sect>
-    );
-  }
-}
+export const Section = ({ children }) => {
+  return (
+    <Sect>
+      <Container>{children}</Container>
+    </Sect>
+  );
+};

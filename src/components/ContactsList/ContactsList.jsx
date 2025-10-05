@@ -1,21 +1,18 @@
-import { Component } from "react";
 import { ContactsItem } from "../ContactsItem/ContactsItem";
 import { List } from "./ContactsListStyled";
 
-export class ContactsList extends Component {
-  render() {
-    return (
-      <>
-        <List onClick={this.props.deleteContact}>
-          {this.props.contacts
-            .filter(({ name }) =>
-              name.toLowerCase().includes(this.props.filter.toLowerCase())
-            )
-            .map((contact) => (
-              <ContactsItem key={contact.id} contact={contact} />
-            ))}
-        </List>
-      </>
-    );
-  }
-}
+export const ContactsList = ({ deleteContact, filter, contacts }) => {
+  return (
+    <>
+      <List onClick={deleteContact}>
+        {contacts
+          .filter(({ name }) =>
+            name.toLowerCase().includes(filter.toLowerCase())
+          )
+          .map((contact) => (
+            <ContactsItem key={contact.id} contact={contact} />
+          ))}
+      </List>
+    </>
+  );
+};
