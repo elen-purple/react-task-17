@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.js": "/react-task-10/static/js/main.5c0d303d.js",
-    "static/media/phone.png": "/react-task-10/static/media/phone.b849744b1adb27a6c7a5.png",
-    "index.html": "/react-task-10/index.html",
-    "main.5c0d303d.js.map": "/react-task-10/static/js/main.5c0d303d.js.map"
+    "main.js": "/react-task-17n/static/js/main.53c5041f.js",
+    "static/media/phone.png": "/react-task-17n/static/media/phone.b849744b1adb27a6c7a5.png",
+    "index.html": "/react-task-17n/index.html",
+    "main.53c5041f.js.map": "/react-task-17n/static/js/main.53c5041f.js.map"
   },
   "entrypoints": [
-    "static/js/main.5c0d303d.js"
+    "static/js/main.53c5041f.js"
   ]
 }
