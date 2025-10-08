@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.js": "/react-task-17/static/js/main.ca66b876.js",
+    "main.js": "/react-task-17/static/js/main.0d1e4c92.js",
     "static/media/phone.png": "/react-task-17/static/media/phone.b849744b1adb27a6c7a5.png",
     "index.html": "/react-task-17/index.html",
-    "main.ca66b876.js.map": "/react-task-17/static/js/main.ca66b876.js.map"
+    "main.0d1e4c92.js.map": "/react-task-17/static/js/main.0d1e4c92.js.map"
   },
   "entrypoints": [
-    "static/js/main.ca66b876.js"
+    "static/js/main.0d1e4c92.js"
   ]
 }
