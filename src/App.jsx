@@ -94,7 +94,7 @@ const App = () => {
       </Section>
       <Section title="Contacts">
         <Title>Contacts</Title>
-        <Filter filter={filter} changeValue={changeFilter} />
+        <Filter filter={filter} changeFilter={changeFilter} />
         <ContactsList
           deleteContact={deleteContact}
           filter={filter}
