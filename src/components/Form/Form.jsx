@@ -10,14 +10,12 @@ import {
   ImgWrap,
   Wrap,
 } from "./FormStyled";
+import { ContactsContext } from "../../context/ContactsContext";
+import { useContext } from "react";
 
-export const Form = ({
-  addContact,
-  name,
-  changeName,
-  number,
-  changeNumber,
-}) => {
+export const Form = () => {
+  const { addContact, name, changeName, number, changeNumber } =
+    useContext(ContactsContext);
   return (
     <Div>
       <Forma onSubmit={addContact}>

@@ -1,6 +1,9 @@
 import { Input } from "./FilterStyled";
+import { ContactsContext } from "../../context/ContactsContext";
+import { useContext } from "react";
 
-export const Filter = ({ changeFilter, filter }) => {
+export const Filter = () => {
+  const { changeFilter, filter } = useContext(ContactsContext);
   return (
     <label>
       <Input

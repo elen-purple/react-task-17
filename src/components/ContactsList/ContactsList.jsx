@@ -1,7 +1,10 @@
 import { ContactsItem } from "../ContactsItem/ContactsItem";
 import { List } from "./ContactsListStyled";
+import { ContactsContext } from "../../context/ContactsContext";
+import { useContext } from "react";
 
-export const ContactsList = ({ deleteContact, filter, contacts }) => {
+export const ContactsList = () => {
+  const { deleteContact, contacts, filter } = useContext(ContactsContext);
   return (
     <>
       <List onClick={deleteContact}>
