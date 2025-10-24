@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useRef } from "react";
 import { useState } from "react";
 import { nanoid } from "nanoid";
 import { getItem } from "../services/getItem";
@@ -12,6 +12,7 @@ export const ContactsProvider = ({ children }) => {
   const [filter, setFilter] = useState("");
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
+  const deletedItem = useRef(null);
 
   const changeName = (e) => {
     const { value } = e.target;
@@ -26,6 +27,13 @@ export const ContactsProvider = ({ children }) => {
   const changeFilter = (e) => {
     const { value } = e.target;
     setFilter(value);
+  };
+
+  const restoreContact = () => {
+    const array = [...contacts];
+    array.unshift(deletedItem.current);
+    deletedItem.current = null;
+    setContacts(array);
   };
 
   const addContact = (e) => {
@@ -48,12 +56,12 @@ export const ContactsProvider = ({ children }) => {
   const deleteContact = (e) => {
     if (e.target.dataset.action === "delete") {
       const array = [...contacts];
-      array.splice(
+      deletedItem.current = array.splice(
         array.indexOf(
           array.find((item) => item.id === e.target.parentElement.id)
         ),
         1
-      );
+      )[0];
 
       setContacts(array);
     }
@@ -75,6 +83,8 @@ export const ContactsProvider = ({ children }) => {
         changeName,
         changeNumber,
         changeFilter,
+        deletedItem,
+        restoreContact,
       }}
     >
       {children}

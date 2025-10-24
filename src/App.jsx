@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { Section } from "./components/Section/Section";
 import { Form } from "./components/Form/Form";
 import { ContactsList } from "./components/ContactsList/ContactsList";
@@ -8,6 +8,7 @@ import { Title } from "./components/ContactsList/ContactsListStyled";
 import { ContactsProvider, ContactsContext } from "./context/ContactsContext";
 import { getItem } from "./services/getItem";
 import { setItem } from "./services/setItem";
+import { Button } from "./components/Button/Button";
 
 const AppContent = () => {
   const { contacts, setContacts } = useContext(ContactsContext);
@@ -32,6 +33,7 @@ const AppContent = () => {
         <Title>Contacts</Title>
         <Filter />
         <ContactsList />
+        <Button />
       </Section>
     </>
   );
